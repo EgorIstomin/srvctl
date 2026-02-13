@@ -1,39 +1,64 @@
 # srvctl
 
-srvctl is a small CLI tool for basic server operations like checking system status, managing systemd services, viewing logs and running simple Docker commands.
+Lightweight CLI tool for everyday server operations written in Go.
 
-It wraps common Linux admin tasks into one simple command so you don’t have to remember long systemctl, journalctl or docker commands.
+srvctl is a simple and fast command-line utility for managing and diagnosing Linux servers.  
+It provides quick access to system status, systemd services, logs, and Docker operations from a single interface.
 
-Build:
+Designed for DevOps and SRE workflows without unnecessary complexity.
 
-go build -o srvctl .
+## Features
 
-Optional install:
+- System status overview (CPU, memory, disk)
+- Manage systemd services (start, stop, restart, status)
+- View logs via journalctl
+- Basic Docker operations
+- Fast access to common server tasks
+- Minimal and clean CLI interface
 
-sudo install -m 0755 srvctl /usr/local/bin/srvctl
+## Installation
 
-Usage:
+Build from source:
 
-srvctl <command> [args]
+git clone https://github.com/EgorIstomin/srvctl
+cd srvctl
+go build -o srvctl
 
-Commands:
+(Optional) Install globally:
 
-srvctl sys uptime        → show uptime  
-srvctl sys df            → show disk usage  
-srvctl sys free          → show memory usage  
-srvctl sys status        → hostname + uptime + disk + memory  
+sudo mv srvctl /usr/local/bin/
 
-srvctl svc status nginx  → check service status  
-srvctl svc restart nginx → restart service  
+## Usage
 
-srvctl logs nginx        → show last 100 log lines  
-srvctl logs nginx --lines 200 → custom log lines  
+Show system status:
 
-srvctl docker ps         → show running containers  
+srvctl status
 
-Requires Linux with systemd.  
-Service restart needs proper permissions.
+Manage services:
 
-srvctl executes system commands with timeouts to avoid hanging processes and returns real stderr when something fails.
+srvctl service restart nginx
+srvctl service status docker
 
-Use it for quick diagnostics, service checks, log viewing and simple operational tasks.
+View logs:
+
+srvctl logs nginx
+
+Docker commands:
+
+srvctl docker ps
+srvctl docker images
+
+## Requirements
+
+- Linux
+- systemd
+- journalctl
+- Docker (optional for docker commands)
+
+## Why
+
+srvctl was created as a fast CLI tool for everyday server management without needing to remember long system commands.
+
+---
+
+Minimal. Fast. Practical.
